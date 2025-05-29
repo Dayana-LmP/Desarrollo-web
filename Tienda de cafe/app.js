@@ -1,28 +1,22 @@
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
-const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const port = 3000;
 
-// Middlewares
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(session({
-  secret: 'cafesecreto',
-  resave: false,
-  saveUninitialized: true
-}));
-
+// Middleware para servir archivos estáticos (CSS, JS, imágenes)
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('view engine', 'ejs');
 
-// Rutas
-const routes = require('./routes/routes');
-app.use('/', routes);
+// Configurar EJS como motor de plantillas
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Ruta para la página principal
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 // Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
 });
