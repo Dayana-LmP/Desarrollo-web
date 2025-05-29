@@ -18,5 +18,5 @@ app.get('/', (req, res) => {
 
 // Iniciar servidor
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Servidor escuchando en http://localhost:3000`);
 });
