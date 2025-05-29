@@ -18,7 +18,7 @@
       <p class="lead text-center">Realiza tu pedido de café aquí</p>
     </div>
 
-    <form id="pedido-form" class="my-4">
+    <form id="pedido-form" class="my-4" method="POST" action="/pedido">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre:</label>
         <input type="text" class="form-control shadow-sm" id="nombre" name="nombre" required />
@@ -51,7 +51,7 @@
       </div>
 
       <div class="text-center">
-        <button type="button" onclick="calcularPrecio()" class="btn btn-primary px-4 shadow">Calcular</button>
+        <button type="submit" class="btn btn-primary px-4 shadow">Calcular y Enviar</button>
       </div>
     </form>
 
@@ -68,10 +68,23 @@
           <th>Entregado</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <% pedidos.forEach(pedido => { %>
+          <tr>
+            <td><%= pedido.id %></td>
+            <td><%= pedido.nombre %></td>
+            <td><%= pedido.drink %></td>
+            <td><%= pedido.ounce %> oz</td>
+            <td><%= pedido.shots %></td>
+            <td>$<%= pedido.precio %></td>
+            <td><%= pedido.estatus %></td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary">Actualizar estatus</button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
     </table>
   </div>
-
-  <script src="/coffee_shop.js"></script>
 </body>
 </html>
